@@ -27,7 +27,63 @@
 #define Rho21 (1e-3)
 // Calculations!
 #define SPdist (0.02)
-#define R2Drop(x,y,a0) (sq((x - 1./(a0*a0) - SPdist)*a0*a0) + sq(y/a0))
+// a0 is the aspect ratio of the ellipse: radial to vertical. 
+#define R2Drop(x,y,a0) (sq((x - pow(a0,-0.6666666667) - SPdist)/pow(a0,-0.6666666667)) + sq(y/pow(a0,0.3333333333)))
+
+/*
+To describe the equation of an ellipse with a given aspect ratio \( a_0 \), where the horizontal axis is along the \( y \)-axis and the vertical axis is along the \( x \)-axis, we start with the standard form of the ellipse equation:
+
+\[
+\frac{y^2}{b^2} + \frac{x^2}{a^2} = 1
+\]
+
+Given the aspect ratio \( a_0 \), which is the ratio of the horizontal diameter (2b) to the vertical diameter (2a), we have:
+
+\[
+a_0 = \frac{2b}{2a} = \frac{b}{a}
+\]
+
+Thus, \( b = a a_0 \). Substituting \( b \) in the ellipse equation, we get:
+
+\[
+\frac{y^2}{(a a_0)^2} + \frac{x^2}{a^2} = 1
+\]
+
+Simplifying, the equation of the ellipse becomes:
+
+\[
+\frac{y^2}{a^2 a_0^2} + \frac{x^2}{a^2} = 1
+\]
+
+or equivalently:
+
+\[
+\frac{y^2}{a^2 a_0^2} + \frac{x^2}{a^2} = 1
+\]
+
+When this ellipse is rotated around the \( x \)-axis, it forms an ellipsoid. The volume \( V \) of an ellipsoid with semi-axes \( a \), \( b \), and \( c \) is given by:
+
+\[
+V = \frac{4}{3} \pi a b c
+\]
+
+For our specific case, the semi-axes are \( a \) (along \( x \)-axis), \( a a_0 \) (along \( y \)-axis), and \( a a_0 \) (along \( z \)-axis). Therefore, the volume \( V \) of the resulting ellipsoid is:
+
+\[
+V = \frac{4}{3} \pi a (a a_0) (a a_0) = \frac{4}{3} \pi a^3 a_0^2
+\]
+
+Thus, the volume of the ellipsoid is:
+
+\[
+V = \frac{4}{3} \pi a^3 a_0^2
+\]
+
+Now, if we need to keep the volume of the ellipsoid constant, we can set \( V = \frac{4}{3} \pi a^3 a_0^2 = \text{constant} \). This implies that the semi-axis \( a \) is equal to \( a_0^{-2/3} \). Therefore, we can write:
+
+\[ \left(\frac{y}{a_0^{1/3}}\right)^2 + \left(\frac{x}{a_0^{-2/3}}\right)^2 = 1 \]
+
+*/
 
 // boundary conditions
 u.t[left] = dirichlet(0.0);
