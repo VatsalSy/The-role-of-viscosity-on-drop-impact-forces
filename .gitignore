@@ -1,6 +1,14 @@
+bounce
+bounce_noSphere
 .DS_Store
 */.DS_Store
 */*/.DS_Store
+intermediate
+intermediate/*
+dump
+restart
+*.html
+log
 # Prerequisites
 *.d
 
